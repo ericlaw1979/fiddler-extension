@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeFiddlerExtension", "RunscopeFiddlerExtension\RunscopeFiddlerExtension.csproj", "{AB6E5622-71BF-470D-BF87-C8F51871025C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeFiddlerExtensionsTests", "RunscopeFiddlerExtensionsTests\RunscopeFiddlerExtensionsTests.csproj", "{9FE6C414-5C87-4349-855B-8E84C7048094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeWebPack", "RunscopeWebPack\RunscopeWebPack.csproj", "{47E95A65-EE04-4540-A06C-D04728C3CAC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeWebPackTests", "RunscopeWebPackTests\RunscopeWebPackTests.csproj", "{C941CD8F-6F7E-47EB-8F37-68D65043D101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeOAuthDesktop", "RunscopeOAuthDesktop\RunscopeOAuthDesktop.csproj", "{89F976C5-2D37-4551-82E2-AF2E93612EF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14E544CC-8AE7-481F-8E93-3BF3DD07B0FD}"
+	ProjectSection(SolutionItems) = preProject
+		ILMerge.cmd = ILMerge.cmd
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB6E5622-71BF-470D-BF87-C8F51871025C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB6E5622-71BF-470D-BF87-C8F51871025C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB6E5622-71BF-470D-BF87-C8F51871025C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB6E5622-71BF-470D-BF87-C8F51871025C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE6C414-5C87-4349-855B-8E84C7048094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE6C414-5C87-4349-855B-8E84C7048094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE6C414-5C87-4349-855B-8E84C7048094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE6C414-5C87-4349-855B-8E84C7048094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E95A65-EE04-4540-A06C-D04728C3CAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E95A65-EE04-4540-A06C-D04728C3CAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E95A65-EE04-4540-A06C-D04728C3CAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E95A65-EE04-4540-A06C-D04728C3CAC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C941CD8F-6F7E-47EB-8F37-68D65043D101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C941CD8F-6F7E-47EB-8F37-68D65043D101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C941CD8F-6F7E-47EB-8F37-68D65043D101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C941CD8F-6F7E-47EB-8F37-68D65043D101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F976C5-2D37-4551-82E2-AF2E93612EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F976C5-2D37-4551-82E2-AF2E93612EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F976C5-2D37-4551-82E2-AF2E93612EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F976C5-2D37-4551-82E2-AF2E93612EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

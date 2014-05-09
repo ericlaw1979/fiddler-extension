@@ -1,0 +1,137 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Runscope;
+using Xunit;
+
+namespace RunscopeWebPackTests
+{
+    public class RunscopeMessageTests
+    {
+
+        [Fact]
+        public void CreateMessageLink()
+        {
+            var link = new MessagesLink();
+
+            Assert.NotNull(link);
+        }
+
+
+        [Fact]
+        public void CreateEmptyRunscopeMessage()
+        {
+            var message = new RunscopeMessage();
+
+            Assert.NotNull(message);
+        }
+
+        [Fact]
+        public void CreateMinimumRunscopeRequest()
+        {
+            var httpRequestMessage = new HttpRequestMessage() { RequestUri = new Uri("http://example.org")};
+            var message = new RunscopeRequest(httpRequestMessage);
+            var jrequest = message.ToJObject();
+            var expected = 
+                new JObject(new[]
+                {
+                    new JProperty("method", "GET"),
+                    new JProperty("url", "http://example.org"),
+                });
+
+            Assert.Equal(expected,jrequest);
+        }
+        [Fact]
+        public void CreateRunscopeRequestWithSingleValueHeaders()
+        {
+            var httpRequestMessage = new HttpRequestMessage() { RequestUri = new Uri("http://example.org") };
+            httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("basic","foo");
+            httpRequestMessage.Headers.CacheControl= new CacheControlHeaderValue() {MaxAge = new TimeSpan(0,0,0,30)};
+            var message = new RunscopeRequest(httpRequestMessage);
+            var jrequest = message.ToJObject();
+            var expected =
+                new JObject(new[]
+                {
+                    new JProperty("method", "GET"),
+                    new JProperty("url", "http://example.org"),
+                    new JProperty("headers", new JObject(new []
+                    {
+                        new JProperty("Authorization","basic foo"),
+                        new JProperty("Cache-Control","max-age=30")
+                    
+                    } )),
+                });
+
+            Assert.Equal(expected, jrequest);
+        }
+
+        [Fact]
+        public void CreateRunscopeRequestWithMultiValueHeaders()
+        {
+            var httpRequestMessage = new HttpRequestMessage() { RequestUri = new Uri("http://example.org") };
+            httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+            httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+ 
+            var message = new RunscopeRequest(httpRequestMessage);
+            var jrequest = message.ToJObject();
+            var expected =
+                new JObject(new[]
+                {
+                    new JProperty("method", "GET"),
+                    new JProperty("url", "http://example.org"),
+                    new JProperty("headers", new JObject(new []
+                    {
+                        new JProperty("Accept",new JArray(new[]{"application/xml", "application/json"})),
+                      } )),
+                });
+
+            Assert.Equal(expected, jrequest);
+        }
+        [Fact]
+        public void CreateRunscopeRequestWithBody()
+        {
+            var httpRequestMessage = new HttpRequestMessage() { RequestUri = new Uri("http://example.org") };
+            httpRequestMessage.Content = new StringContent("This is some text");
+            
+            var message = new RunscopeRequest(httpRequestMessage);
+            var jrequest = message.ToJObject();
+            var expected =
+                new JObject(new[]
+                {
+                    new JProperty("method", "GET"),
+                    new JProperty("url", "http://example.org"),
+                    new JProperty("body", "This is some text"),
+                    new JProperty("headers", new JObject(new []
+                    {
+                        new JProperty("Content-Type","text/plain; charset=utf-8"),
+                      } ))
+
+                });
+
+            Assert.Equal(expected, jrequest);
+        }
+
+        [Fact]
+        public void CreateMinimumRunscopeResponse()
+        {
+            var httpResponseMessage = new HttpResponseMessage() { StatusCode= HttpStatusCode.NotFound};
+            var message = new RunscopeResponse(httpResponseMessage);
+            var jresponse = message.ToJObject();
+            var expected =
+                new JObject(new[]
+                {
+                    new JProperty("status", 404),
+                    
+                });
+
+            Assert.Equal(expected, jresponse);
+        }
+    
+    }
+}
