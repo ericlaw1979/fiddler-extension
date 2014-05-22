@@ -14,8 +14,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunscopeOAuthDesktop", "RunscopeOAuthDesktop\RunscopeOAuthDesktop.csproj", "{89F976C5-2D37-4551-82E2-AF2E93612EF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14E544CC-8AE7-481F-8E93-3BF3DD07B0FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{BA41F6B8-2E78-41C3-A8EE-8BFD63D4DEEE}"
 	ProjectSection(SolutionItems) = preProject
-		ILMerge.cmd = ILMerge.cmd
+		build\ChocolateyInstall.ps1 = build\ChocolateyInstall.ps1
+		build\ChocolateyUninstall.ps1 = build\ChocolateyUninstall.ps1
+		build\ILMerge.cmd = build\ILMerge.cmd
+		build\RunscopeFiddlerExtension.nuspec = build\RunscopeFiddlerExtension.nuspec
 	EndProjectSection
 EndProject
 Global

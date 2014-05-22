@@ -87,7 +87,7 @@ namespace RunscopeWebPackTests
                     new JProperty("url", "http://example.org"),
                     new JProperty("headers", new JObject(new []
                     {
-                        new JProperty("Accept",new JArray(new[]{"application/xml", "application/json"})),
+                        new JProperty("Accept","application/xml, application/json"),
                       } )),
                 });
 

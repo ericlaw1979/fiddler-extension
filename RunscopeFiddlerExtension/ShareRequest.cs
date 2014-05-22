@@ -200,13 +200,21 @@ namespace RunscopeFiddlerExtension
                 RequestUri = new Uri(session.url, UriKind.RelativeOrAbsolute),
                 Method = new HttpMethod(session.RequestMethod)
             };
+            var failedHeaders = new List<HTTPHeaderItem>();
             foreach (var header in session.oRequest.headers)
             {
-                request.Headers.TryAddWithoutValidation(header.Name, header.Value);
+                if (!request.Headers.TryAddWithoutValidation(header.Name, header.Value))
+                {
+                    failedHeaders.Add(header);
+                }
             }
             if (session.RequestBody.Length > 0)
             {
                 request.Content = new ByteArrayContent(session.RequestBody);
+                foreach (var header in failedHeaders)
+                {
+                    request.Content.Headers.TryAddWithoutValidation(header.Name, header.Value);
+                }
             }
             return request;
         }
@@ -217,15 +225,22 @@ namespace RunscopeFiddlerExtension
             {
                 StatusCode = (HttpStatusCode) session.responseCode
             };
-
+            var failedHeaders = new List<HTTPHeaderItem>();
             foreach (var header in session.oResponse.headers)
             {
-                response.Headers.TryAddWithoutValidation(header.Name, header.Value);
+                if(!response.Headers.TryAddWithoutValidation(header.Name, header.Value))
+                {
+                    failedHeaders.Add(header);
+                }
             }
 
             if (session.ResponseBody.Length > 0)
             {
                 response.Content = new ByteArrayContent(session.ResponseBody);
+                foreach (var header in failedHeaders)
+                {
+                    response.Content.Headers.TryAddWithoutValidation(header.Name, header.Value);
+                }
             }
             return response;
         }

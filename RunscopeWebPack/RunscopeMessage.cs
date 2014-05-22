@@ -39,7 +39,8 @@ namespace Runscope
             {
                 if (header.Value.Count() > 1)
                 {
-                    jheaders.Add(new JProperty(header.Key, new JArray(header.Value)));
+                    string delimiter = _SpaceDelimitedHeaders.Contains(header.Key) ? " " : ", ";
+                    jheaders.Add(new JProperty(header.Key, string.Join(delimiter, header.Value)));
                 }
                 else
                 {
@@ -47,6 +48,12 @@ namespace Runscope
                 }
             }
         }
+        private static readonly HashSet<string> _SpaceDelimitedHeaders =
+          new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "User-Agent",
+                "Server"
+            };
     }
 
     public class RunscopeRequest

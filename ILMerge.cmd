@@ -1,1 +1,0 @@
-ilmerge /out:RunscopeFiddler.dll .\RunscopeFiddlerExtension.dll .\Microsoft.Owin.dll .\Microsoft.Owin.Host.HttpListener.dll .\Microsoft.Owin.Hosting.dll .\Owin.dll .\System.Net.Http.Formatting.dll .\System.Web.Http.dll .\Newtonsoft.Json.dll .\RunscopeOAuthDesktop.dll .\RunscopeWebPack.dll  .\System.Web.Http.Owin.dll /allowdup /v4
