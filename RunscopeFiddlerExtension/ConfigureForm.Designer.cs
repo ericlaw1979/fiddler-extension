@@ -30,7 +30,7 @@
         {
             this.cmdOk = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboBuckets = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -42,9 +42,11 @@
             this.cmdOk.TabIndex = 0;
             this.cmdOk.Text = "&Ok";
             this.cmdOk.UseVisualStyleBackColor = true;
+            this.cmdOk.Click += new System.EventHandler(this.cmdOk_Click);
             // 
             // cmdCancel
             // 
+            this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCancel.Location = new System.Drawing.Point(380, 370);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(129, 47);
@@ -52,20 +54,20 @@
             this.cmdCancel.Text = "&Cancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // cboBuckets
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(49, 83);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(269, 24);
-            this.comboBox1.TabIndex = 2;
+            this.cboBuckets.FormattingEnabled = true;
+            this.cboBuckets.Location = new System.Drawing.Point(49, 83);
+            this.cboBuckets.Name = "cboBuckets";
+            this.cboBuckets.Size = new System.Drawing.Size(269, 28);
+            this.cboBuckets.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(46, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 17);
+            this.label1.Size = new System.Drawing.Size(127, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Target Bucket";
             // 
@@ -76,10 +78,10 @@
             this.CancelButton = this.cmdCancel;
             this.ClientSize = new System.Drawing.Size(517, 429);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboBuckets);
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdOk);
-            this.Font = new System.Drawing.Font("Verdana", 6.985075F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 9.134328F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -94,7 +96,7 @@
 
         private System.Windows.Forms.Button cmdOk;
         private System.Windows.Forms.Button cmdCancel;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboBuckets;
         private System.Windows.Forms.Label label1;
     }
 }

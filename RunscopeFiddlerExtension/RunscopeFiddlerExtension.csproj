@@ -79,12 +79,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AuthForm.Designer.cs">
-      <DependentUpon>AuthForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigureForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,9 +93,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuthForm.resx">
-      <DependentUpon>AuthForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ConfigureForm.resx">
       <DependentUpon>ConfigureForm.cs</DependentUpon>
     </EmbeddedResource>

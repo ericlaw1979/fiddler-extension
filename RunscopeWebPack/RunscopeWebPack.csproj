@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BucketsLink.cs" />
     <Compile Include="MessagesLink.cs" />
     <Compile Include="OAuth2AuthorizeLink.cs" />
     <Compile Include="OAuth2TokenLink.cs" />

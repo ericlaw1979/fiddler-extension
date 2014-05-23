@@ -51,11 +51,24 @@ namespace RunscopeFiddlerExtension
 
         private void ConfigureRunscope()
         {
+            // Load Buckets
+            var bucketsLink = new BucketsLink();
             var form = new ConfigureForm();
+            form.SelectedBucketKey = _Bucket;
+            _Client.SendAsync(bucketsLink.BuildGetRequest())
+                .ContinueWith(t =>
+                {
+                    bucketsLink.ParseResponse(t.Result)
+                        .ContinueWith(t2 => { form.Buckets = bucketsLink.ParseBucketList(t2.Result); });
+                    
+                });
+         
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
-                // Update settings
+                FiddlerApplication.Prefs.SetStringPref("runscope.bucketkey", form.SelectedBucketKey);
+                
+                _Bucket = form.SelectedBucketKey;
             }
 
         }

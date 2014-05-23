@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{BA41F6B8
 	ProjectSection(SolutionItems) = preProject
 		build\ChocolateyInstall.ps1 = build\ChocolateyInstall.ps1
 		build\ChocolateyUninstall.ps1 = build\ChocolateyUninstall.ps1
-		build\ILMerge.cmd = build\ILMerge.cmd
+		build\ILMerge.ps1 = build\ILMerge.ps1
 		build\RunscopeFiddlerExtension.nuspec = build\RunscopeFiddlerExtension.nuspec
 	EndProjectSection
 EndProject

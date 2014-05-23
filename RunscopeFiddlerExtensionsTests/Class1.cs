@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -18,13 +20,7 @@ namespace RunscopeFiddlerExtensionsTests
     {
        
 
-        [Fact]
-        public void TestOAuth()
-        {
-            var form = new AuthForm();
-            form.ShowDialog();
-            Assert.NotNull(form.AuthorizationCode);
-        }
+
 
         [Fact]
         public void TestOAuthDesktopFlow()
@@ -69,5 +65,30 @@ namespace RunscopeFiddlerExtensionsTests
         //    ;
         //    Assert.NotNull(link);
         //}
+
+        [Fact]
+        public Task GetBucketsList()
+        {
+            var client = new HttpClient {BaseAddress = new Uri("https://api.runscope.com")};
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "d1aca20b-d15d-4dc7-8215-83c99664a79d");
+            
+
+            var bucketsLink = new BucketsLink();
+            var buckets = new List<Bucket>();
+            return client.SendAsync(bucketsLink.BuildGetRequest())
+                 .ContinueWith(t =>
+                 {
+                     bucketsLink.ParseResponse(t.Result)
+                         .ContinueWith(t2 =>
+                         {
+                             buckets = bucketsLink.ParseBucketList(t2.Result);
+                             Assert.NotNull(buckets);
+                         });
+
+                 });
+
+            
+            
+        }
     }
 }
