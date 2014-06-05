@@ -48,13 +48,13 @@ namespace RunscopeFiddlerExtensionsTests
                 server.Dispose();
             }
         }
-        [Fact]
-        public void GetToken()
-        {
-            var share = new ShareRequest();
-            var token = share.GetAuthToken();
-            Assert.NotNull(token);
-        }
+        //[Fact]
+        //public void GetToken()
+        //{
+        //    var share = new ShareRequest();
+        //    var token = share.GetAuthToken();
+        //    Assert.NotNull(token);
+        //}
 
         //[Fact]
         //public void CreateMessageLinkRequest()

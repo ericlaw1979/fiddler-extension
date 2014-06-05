@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace Runscope
@@ -44,6 +45,20 @@ namespace Runscope
                 WarningCount = (int)body["meta"]["warning_count"],
             }};
             return createResponse;
+        }
+
+        public async Task<Guid> ParseNewMessageId(HttpResponseMessage response)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+                return new Guid((string)(jObject["data"][0]["uuid"]));
+            }
+            else
+            {
+                return Guid.Empty;
+            }
+;
         }
     }
 

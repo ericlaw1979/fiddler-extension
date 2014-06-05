@@ -132,6 +132,26 @@ namespace RunscopeWebPackTests
 
             Assert.Equal(expected, jresponse);
         }
-    
+
+        [Fact]
+        public void FindEasyHexEscape()
+        {
+            byte b = 135;
+            var s = Uri.HexEscape((char) b);
+            var uri = new Uri(s, UriKind.Relative);
+            var suri = uri.ToString();
+            int z = 0;
+            var c = Uri.HexUnescape(s,ref z);
+        }
+        //[Fact]
+        //public void Unicodeuri()
+        //{
+        //    string message = "Here is a string with a Unicode char \u0298";
+        //    char.IsLetterOrDigit()
+        //        Uri.
+        //    var bytes = String.Join("",Encoding.UTF8.GetBytes(message).Select(b => Uri.HexEscape((char)b)));
+        //}
+
     }
+
 }

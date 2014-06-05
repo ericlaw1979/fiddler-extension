@@ -7,14 +7,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Runscope;
 
 namespace RunscopeFiddlerExtension
 {
     public partial class ConfigureForm : Form
     {
-        private List<Bucket> _buckets;
-        public string SelectedBucketKey { get; set; }
+        private readonly ConfigureViewModel _model;
+
+        public ConfigureForm(ConfigureViewModel model) : this()
+        {
+            _model = model;
+            _model.PropertyChanged += _model_PropertyChanged;
+
+            RefreshApiKey();
+            RefreshUseProxy();
+            LoadBuckets();
+        }
+
+        private void RefreshUseProxy()
+        {
+            chkUseProxy.Checked = _model.UseProxy;
+        }
+
+        void _model_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Buckets")
+            {
+                Invoke((Action)LoadBuckets);
+            }
+            if (e.PropertyName == "ApiKey")
+            {
+                Invoke((Action)RefreshApiKey);
+            }
+            
+        }
+
         public ConfigureForm()
         {
             InitializeComponent();
@@ -24,35 +51,36 @@ namespace RunscopeFiddlerExtension
 
         void CboBucketsSelectedValueChanged(object sender, EventArgs e)
         {
-            SelectedBucketKey =
-                _buckets.Where(b => b.Name == (string) cboBuckets.SelectedItem).Select(b => b.Key).FirstOrDefault();
-            
+            _model.SelectBucket((string) cboBuckets.SelectedItem);
         }
 
-        public List<Runscope.Bucket> Buckets
+        private void RefreshApiKey()
         {
-            get { return _buckets; }
-            set
-            {
-                _buckets = value;
-                this.Invoke((Action)LoadBuckets);
-                
-                
-            }
+            txtApiKey.Text = _model.ApiKey;
         }
 
         private void LoadBuckets()
         {
             cboBuckets.Items.Clear();
-            foreach (var bucket in _buckets)
+
+            if (_model.Buckets != null && _model.Buckets.Count > 0)
             {
-                this.cboBuckets.Items.Add(bucket.Name);
+                foreach (var bucket in _model.Buckets)
+                {
+                    cboBuckets.Items.Add(bucket.Name);
+                }
+           
+                cboBuckets.Enabled = true;
+                var selectedBucket = _model.SelectedBucket;
+                if (selectedBucket != null)
+                {
+                    cboBuckets.SelectedItem = selectedBucket.Name;
+                }
             }
-            cboBuckets.Enabled = true;
-            var selectedBucket = _buckets.FirstOrDefault(b => b.Key == SelectedBucketKey);
-            if (selectedBucket != null)
+            else
             {
-                cboBuckets.SelectedItem = selectedBucket.Name;
+                cboBuckets.Enabled = false;
+                
             }
 
         }
@@ -61,6 +89,21 @@ namespace RunscopeFiddlerExtension
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdGetKey_Click(object sender, EventArgs e)
+        {
+            _model.GetApiKey();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            _model.UseProxy = chkUseProxy.Checked;
         }
 
 

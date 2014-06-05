@@ -35,6 +35,7 @@ namespace Runscope
 
         public  List<Bucket> ParseBucketList(JObject jBuckets)
         {
+            if (jBuckets == null) return new List<Bucket>();
             return ((JArray) jBuckets["data"]).Cast<JObject>()
                 .Select(jb => new Bucket(){Name = (string)jb.Property("name"),
                                            Key = (string)jb.Property("key")
