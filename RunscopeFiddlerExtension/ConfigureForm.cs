@@ -106,6 +106,11 @@ namespace RunscopeFiddlerExtension
             _model.UseProxy = chkUseProxy.Checked;
         }
 
+        private void txtApiKey_Validating(object sender, CancelEventArgs e)
+        {
+            _model.ApiKey = txtApiKey.Text;
+        }
+
 
 
     }

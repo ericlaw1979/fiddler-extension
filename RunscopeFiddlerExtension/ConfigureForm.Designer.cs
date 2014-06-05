@@ -83,6 +83,7 @@
             this.txtApiKey.Name = "txtApiKey";
             this.txtApiKey.Size = new System.Drawing.Size(296, 28);
             this.txtApiKey.TabIndex = 4;
+            this.txtApiKey.Validating += new System.ComponentModel.CancelEventHandler(this.txtApiKey_Validating);
             // 
             // label2
             // 

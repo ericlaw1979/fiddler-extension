@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -12,8 +11,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Host.HttpListener;
-using Microsoft.Owin.Hosting;
-using Owin;
+
 
 namespace Runscope
 {
