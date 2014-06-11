@@ -4,7 +4,8 @@ try {
   
   $installDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)" 
   $fileToInstall = Join-Path $installDir "RunscopeFiddler.dll"
-  $destinationFolder = Join-Path ${Env:ProgramFiles(x86)} "Fiddler2\Scripts" 
+  $r = get-item "HKLM:\Software\Microsoft\Fiddler2"
+  $destinationFolder = $r.GetValue("LMScriptPath")
   copy-item $fileToInstall $destinationFolder
   
 

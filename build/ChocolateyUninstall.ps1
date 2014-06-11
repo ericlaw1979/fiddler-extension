@@ -3,7 +3,8 @@ $packageName = 'RunscopeFiddlerExtension'
 try { 
   
    
-  $destinationFolder = Join-Path ${Env:ProgramFiles(x86)} "Fiddler2\Scripts" 
+  $r = get-item "HKLM:\Software\Microsoft\Fiddler2"
+  $destinationFolder = $r.GetValue("LMScriptPath")
   $targetFile = Join-Path $destinationFolder "RunscopeFiddler.dll"
   remove-item $targetFile
  

@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>RunscopeFiddlerExtension</id>
-    <version>1.0.2</version>
+    <id>runscope.fiddlerextension</id>
+    <version>1.0.4</version>
     <title>Runscope Fiddler Extension</title>
     <authors>Darrel Miller</authors>
     <owners>Runscope Inc.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Runscope Fiddler Extension</description>
     <copyright>Runscope Copyright 2014</copyright>
+    <tags>fiddler runscope http</tags>
   </metadata>
   <files>
   		<file src="RunscopeFiddler.dll" target="tools"/>

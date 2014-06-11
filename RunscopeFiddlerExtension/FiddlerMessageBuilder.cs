@@ -15,7 +15,7 @@ namespace RunscopeFiddlerExtension
         {
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri(session.url, UriKind.RelativeOrAbsolute),
+                RequestUri = new Uri(session.fullUrl, UriKind.RelativeOrAbsolute),
                 Method = new HttpMethod(session.RequestMethod)
             };
             var failedHeaders = new List<HTTPHeaderItem>();
