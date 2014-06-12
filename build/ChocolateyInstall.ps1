@@ -6,6 +6,7 @@ try {
   $fileToInstall = Join-Path $installDir "RunscopeFiddler.dll"
   $r = get-item "HKLM:\Software\Microsoft\Fiddler2"
   $destinationFolder = $r.GetValue("LMScriptPath")
+  $destinationFolder = $destinationFolder.Replace("""","") # Remove redundant surrouding quotes
   copy-item $fileToInstall $destinationFolder
   
 

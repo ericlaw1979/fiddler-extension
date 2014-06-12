@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>runscope.fiddlerextension</id>
-    <version>1.0.4</version>
+    <version>1.0.7</version>
     <title>Runscope Fiddler Extension</title>
     <authors>Darrel Miller</authors>
     <owners>Runscope Inc.</owners>
