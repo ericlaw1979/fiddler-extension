@@ -8,7 +8,7 @@ namespace RunscopeFiddlerExtension
     {
         public void InstallContextMenu(MenuItem menuItem)
         {
-            FiddlerApplication.UI.lvSessions.ContextMenu.MenuItems.Add(menuItem);
+            FiddlerApplication.UI.lvSessions.ContextMenu.MenuItems.Add(0, menuItem);
         }
 
         public void InstallConfigMenu(MenuItem menuItem)
