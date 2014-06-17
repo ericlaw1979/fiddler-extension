@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Fiddler;
 
 namespace RunscopeFiddlerExtension
@@ -15,7 +12,7 @@ namespace RunscopeFiddlerExtension
         {
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri(session.fullUrl, UriKind.RelativeOrAbsolute),
+                RequestUri = new Uri(session.fullUrl, UriKind.Absolute),
                 Method = new HttpMethod(session.RequestMethod)
             };
             var failedHeaders = new List<HTTPHeaderItem>();

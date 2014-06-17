@@ -8,7 +8,6 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Fiddler;
 using Runscope;
 
 namespace RunscopeFiddlerExtension
@@ -79,8 +78,8 @@ namespace RunscopeFiddlerExtension
             _ApiKey = runscopeSettings.ApiKey;
             _UseProxy = runscopeSettings.UseProxy;
 
-            // Configure form uses it's own HttpClient to enable retreiving a list of buckets using the API key and then allowing the 
-            // user to cancel the configure form
+            // The Configure form uses its own HttpClient to enable retreiving a list of buckets using the API key, 
+            // allowing the user to cancel the configure form
             _httpClient = new HttpClient()
             {
                 BaseAddress = new Uri("https://api.runscope.com")
@@ -105,32 +104,27 @@ namespace RunscopeFiddlerExtension
             var buckets = await bucketsLink.ParseResponse(response);
 
             Buckets = bucketsLink.ParseBucketList(buckets); 
-            
         }
         private string GetBucketKey(string bucketName)
         {
             return Buckets.Where(b => b.Name == bucketName).Select(b => b.Key).FirstOrDefault();
         }
 
-         public void SelectBucket(string bucketName)
+        public void SelectBucket(string bucketName)
         {
             SelectedBucketKey = GetBucketKey(bucketName);
-           
         }
-         public Bucket SelectedBucket 
-         {
-             get { return Buckets.FirstOrDefault(b => b.Key == SelectedBucketKey); }
-
-         }
+        public Bucket SelectedBucket 
+        {
+            get { return Buckets.FirstOrDefault(b => b.Key == SelectedBucketKey); }
+        }
 
         public void GetApiKey()
         {
             var accessToken = GetAuthToken();
 
             ApiKey = accessToken;
-
         }
-
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

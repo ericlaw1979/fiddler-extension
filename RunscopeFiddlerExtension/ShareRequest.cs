@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fiddler;
@@ -37,7 +31,7 @@ namespace RunscopeFiddlerExtension
         {
             _SendMenuItem.Click += (s, e) => ShareSelectedRequests();
             _ConfigureRunscope.Click += (s, e) => ConfigureRunscope();
-    
+
             _hostAdapter.InstallConfigMenu(_ConfigureRunscope);
             _hostAdapter.InstallContextMenu(_SendMenuItem);
 
@@ -60,21 +54,20 @@ namespace RunscopeFiddlerExtension
 
         public void ConfigureRunscope()
         {
-           
+
             var model = new ConfigureViewModel(_runscopeSettings);
             var form = new ConfigureForm(model);
-         
-            var result = form.ShowDialog();
+
+            var result = form.ShowDialog(FiddlerApplication.UI);
             if (result == DialogResult.OK)
             {
-
                 _runscopeSettings.Bucket = model.SelectedBucketKey;
                 _runscopeSettings.ApiKey = model.ApiKey;
                 _runscopeSettings.UseProxy = model.UseProxy;
 
                 _Client = CreateHttpClient();
             }
-            
+
         }
 
         private void UpdateApiKey(HttpClient httpClient)
@@ -85,8 +78,7 @@ namespace RunscopeFiddlerExtension
                     _runscopeSettings.ApiKey);
             }
         }
-       
-  
+
         public void OnBeforeUnload()
         {
             _SendMenuItem.Dispose();
@@ -123,19 +115,17 @@ namespace RunscopeFiddlerExtension
            
         }
 
-        
-
         private async Task SendRequests()
         {
 
             Session session = _hostAdapter.SelectedSession;
-            
+
             var srequest = FiddlerMessageBuilder.CreateRequestFromSession(session);
             var sresponse = FiddlerMessageBuilder.CreateResponseFromSession(session);
-            
+
             // CreateMessage
             var messagesLink = new MessagesLink();
-            var request = messagesLink.BuildPOSTRequest(_runscopeSettings.Bucket, srequest,sresponse); //es3pfvznehtn
+            var request = messagesLink.BuildPOSTRequest(_runscopeSettings.Bucket, srequest, sresponse);
             var response = await _Client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
@@ -144,11 +134,12 @@ namespace RunscopeFiddlerExtension
                 // Share Message
                 var sharedMessageLink = new SharedMessageLink();
                 var shareRequest = sharedMessageLink.BuildPUTRequest(_runscopeSettings.Bucket, messageId);
-                   
+
                 var shareResponse = await _Client.SendAsync(shareRequest);
                 var publicurl = await sharedMessageLink.ParsePublicUri(shareResponse);
                 if (publicurl != null)
                 {
+                    // SECURITY: TODO: Do we need to validate that the Absolute URI is HTTP/HTTPS?
                     Process.Start(publicurl.AbsoluteUri);
                 }
             }

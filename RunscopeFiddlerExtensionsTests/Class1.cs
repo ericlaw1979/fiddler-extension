@@ -18,12 +18,9 @@ namespace RunscopeFiddlerExtensionsTests
 {
     public class MessageLinkTests
     {
-       
 
-
-
-        [Fact]
-        public void TestOAuthDesktopFlow()
+        /* Temporarily disable tests since we're not doing the OWin stuff anymore
+        [Fact] public void TestOAuthDesktopFlow()
         {
             using (var flow = new OAuthDesktopFlow())
             {
@@ -48,6 +45,7 @@ namespace RunscopeFiddlerExtensionsTests
                 server.Dispose();
             }
         }
+         */
         //[Fact]
         //public void GetToken()
         //{

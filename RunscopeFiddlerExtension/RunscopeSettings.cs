@@ -49,11 +49,10 @@ namespace RunscopeFiddlerExtension
         {
             _preferences = preferences;
             UseProxy = _preferences.GetBoolPref("runscope.useproxy", false);
-            ApiKey = _preferences.GetStringPref("runscope.apikey", "");
-            Bucket = _preferences.GetStringPref("runscope.bucketkey", "" );
+            ApiKey = _preferences.GetStringPref("runscope.apikey", String.Empty);
+            Bucket = _preferences.GetStringPref("runscope.bucketkey", String.Empty);
 
             _preferences.AddWatcher("runscope.", OnPrefChange);
-
         }
 
         public bool ConfigComplete()
@@ -62,20 +61,19 @@ namespace RunscopeFiddlerExtension
                     !String.IsNullOrEmpty(_bucket));
         }
 
-
         private void OnPrefChange(object sender, PrefChangeEventArgs oPref)
         {
-            if (oPref.PrefName == "runscope.apikey")
+            switch(oPref.PrefName)
             {
-                ApiKey = oPref.ValueString;
-            }
-            if (oPref.PrefName == "runscope.bucketkey")
-            {
-                Bucket = oPref.ValueString;
-            }
-            if (oPref.PrefName == "runscope.useproxy")
-            {
-                UseProxy = oPref.ValueBool;             
+                case "runscope.apikey":
+                    ApiKey = oPref.ValueString;
+                    break;
+                case "runscope.bucketkey":
+                    Bucket = oPref.ValueString;
+                    break;
+                case "runscope.useproxy":
+                    UseProxy = oPref.ValueBool;
+                    break;
             }
         }
 
